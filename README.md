@@ -5,9 +5,13 @@ It looks almost like a default theme - but it is dark!
 
 ## How to install
 Just put the `custom.css` in this place on your device:
-```~/.jupyter/custom/custom.css```
-or sometimes this place is here:
-```~/.ipython/profile_default/static/custom/custom.css```
+```
+~/.jupyter/custom/custom.css
+```
+Or sometimes this place is here:
+```
+~/.ipython/profile_default/static/custom/custom.css
+```
 (`~` = User home folder, replace it with `%userprofile%` on Windows)
 
 Done! Now Jupyter Notebook GUI is dark!
