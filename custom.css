@@ -46,27 +46,6 @@
     Original Base16 color scheme by Chris Kempson ( https://github.com/chriskempson/base16 )
 */
 
-/*
-
-Useful script to disable/re-enable image brightness inversion by clicking on image:
-
-```js
-window.addEventListener('click', (event) => {
-    let target = event.target
-    if (!(target instanceof HTMLImageElement)) {
-        return
-    }
-    if (!target.parentNode.classList.contains('output_subarea')) {
-        return
-    }
-    target.style.filter = target.style.filter ? '' : 'none'
-    event.preventDefault()
-    event.stopPropagaion()
-})
-```
-
-*/
-
 
 /* remove chrome skip-ink */
 /* go home you drunk chrome */
@@ -93,11 +72,6 @@ Remove math shaky behavior bug caused by style:
 /* disable all dark styles when printing */
 @media not print {
 
-
-div.input_area {
-    border-color: rgba(0, 0, 0, 0.10);
-    background: rbga(0, 0, 0, 0.5);
-}
 
 /* GLOBALS */
 
@@ -433,6 +407,11 @@ div.output_html { font-family: sans-serif; }
     filter: invert(1);
 }
 
+div.input_area {
+    border-color: rgba(0, 0, 0, 0.10);
+    background: rbga(0, 0, 0, 0.5);
+}
+
 .notebook_app div.cell.running .input .input_area { 
     border-left-color: #eea236;
 }
@@ -563,7 +542,7 @@ div.CodeMirror-selected {background: rgba(221, 240, 255, 0.19) !important;}
 .cm-s-default span.cm-variable-2 {color: #7587A6;}
 .cm-s-default span.cm-comment {color: #7F7A80;}
 
-/* copypaste end */
+/* copypaste end, but some things above were also added */
 
 /*
     Misc
