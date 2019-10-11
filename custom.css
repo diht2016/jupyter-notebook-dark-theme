@@ -1,0 +1,679 @@
+/*
+	# Jupyter Notebook Dark theme
+	
+	## How to install
+
+	Just put this file here:
+	
+	`~/.jupyter/custom/custom.css`
+	or sometimes it is here:
+	`~/.ipython/profile_default/static/custom/custom.css`
+	(`~` = User home folder, replace it with `%userprofile%` on Windows)
+	
+	Done! Now Notebook GUI is dark!
+	Then just reload pages in browser if Jupyter is running.
+	Reset to light theme = just replace the custom.css with empty file.
+*/
+
+/*
+	Dark theme is fully compatible with printing - it turns off automatically.
+	(don't mind the broken print preview, in print dialog it is fine)
+*/
+
+
+
+/*
+	Mostly copypasted from here:
+	'-------------> ( https://github.com/powerpak/jupyter-dark-theme/blob/master/custom.css );;
+	
+	+ some fixes
+	+ MUCH MORE pieces of GUI (including rare ones) are now dark
+	+ brought back some parts of GUI disabled by former authors
+*/
+
+/*
+	Original comment from copypasted source:
+	
+	Dark theme for Jupyter Notebook/iPython 4
+	Author: Theodore Pak
+	Repo at: ( https://github.com/powerpak/jupyter-dark-theme )
+
+	Inspired by and adapted from the following:
+	Base16 for iPython Notebook (https://github.com/nsonnad/base16-ipython-notebook )
+	Base16 Twilight Dark, David Hart ( http://hart-dev.com )
+	CodeMirror template adapted for IPython Notebook by Nikhil Sonnad ( https://github.com/nsonnad/base16-ipython-notebook )
+	CodeMirror template by Jan T. Scott ( https://github.com/idleberg/base16-chrome-devtools )
+	Original Base16 color scheme by Chris Kempson ( https://github.com/chriskempson/base16 )
+*/
+
+/*
+
+Useful script to disable/re-enable image brightness inversion by clicking on image:
+
+```js
+window.addEventListener('click', (event) => {
+	let target = event.target
+	if (!(target instanceof HTMLImageElement)) {
+		return
+	}
+	if (!target.parentNode.classList.contains('output_subarea')) {
+		return
+	}
+	target.style.filter = target.style.filter ? '' : 'none'
+	event.preventDefault()
+	event.stopPropagaion()
+})
+```
+
+*/
+
+
+/* remove chrome skip-ink */
+/* go home you drunk chrome */
+* {
+	text-decoration-skip-ink: none;
+}
+
+/*
+
+Remove math shaky behavior bug caused by style:
+
+```css
+.MathJax:focus, body :focus .MathJax {
+	display: inline-table;
+}
+```
+*/
+.MathJax {
+	display: inline-table !important;
+}
+
+
+
+/* disable all dark styles when printing */
+@media not print {
+
+
+div.input_area {
+	border-color: rgba(0, 0, 0, 0.10);
+	background: rbga(0, 0, 0, 0.5);
+}
+
+/* GLOBALS */
+
+body {
+	background-color: #333;
+	color: #ddd;
+}
+
+a { color: #0af; }
+a:hover, a:focus { color: #5cf; }
+
+hr {
+	border-top: 1px solid #777;
+	border-bottom: 1px solid #444;
+}
+
+pre {
+	border-color: #555;
+    background-color: #444;
+    color: #ddd;
+}
+
+input, textarea, select {
+	background: #333;
+	border-color: #555;
+	color: #ddd;
+}
+
+/* widget close button */
+
+.close {
+	color: #fff;
+    text-shadow: 0 1px 0 #555;
+    opacity: 0.5;
+}
+
+/* INTRO PAGE */
+
+body[data-notebook-path] { background-color: #222; }
+
+.tabbable { color: #979797; }
+.nav-tabs { border-bottom-color: #444; }
+.nav-tabs > li > a:hover, .nav > li > a:focus {
+	background-color: #333;
+	border-color: #222 #222 #555 #222;
+}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover { 
+	color: #979797;
+	background-color: #444;
+	border-top-color: #444;
+	border-right-color: #444;
+	border-left-color: #444;
+}
+.list_container { border-color: #444; }
+.list_container > div { border-bottom-color: #444; }
+.list_item:hover { background-color: #333; }
+.list_header { background-color: #444; }
+#notebook_list input[type="checkbox"] { opacity: 0.3; }
+#notebook_list input[type="checkbox"]:checked { opacity: 1; }
+.item_icon { color: #777; }
+.panel { border-color: #444; background-color: #222; }
+.panel-default > .panel-heading { border-color: #444; }
+#site .panel-group .panel .panel-heading { background-color: #444; }
+#running .panel-group .panel .panel-body .list_container .list_item { border-bottom-color: #444; }
+
+/* Dropdown menus */
+
+.dropdown-menu {
+	background: rgba(50, 50, 50, 0.95);
+	color: #b7b7b7;
+}
+.dropdown-menu > li > a, .dropdown-submenu > a:after, .dropdown-menu > li > a:visited:after {
+	color: #b7b7b7;
+}
+.dropdown-menu .divider {
+	background-color: #444;
+}
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+	color: #fff;
+	background-color: #444;
+}
+.dropdown-menu > li > a:hover:after, .dropdown-menu > li > a:focus:after, 
+.dropdown-menu > li > a:active:after {
+	color: #fff;
+}
+
+/* TERMINAL INTERFACE */
+.terminal-app #site { background: #272727; }
+.terminal-app .terminal { background: #141414 !important; }
+
+/* NOTEBOOK AND EDITOR INTERFACE */
+
+/*
+	Header UI styles
+*/
+
+body.notebook_app > #header { display: block !important; }
+.notebook_app > #header, .edit_app > #header { 
+	background-color: #333;
+	color: #b7b7b7;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+.edit_app #menubar .navbar { margin-bottom: 0; }
+body > #header .header-bar { background: #444; }
+#header .navbar-brand { display: none; }
+#header .filename { margin-left: 0; margin-right: 2em; }
+span.save_widget span.filename:hover {
+	background: rgba(255, 255, 255, 0.15);
+	color: #fff;
+	text-shadow: 0px 1px 1px rgba(0, 0, 0, 0.5);
+}
+.navbar-default {
+	background: transparent;
+	color: #b7b7b7;
+	border-color: #444;
+}
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+	color: #fff;
+}
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+	color: #fff;
+	background-color: #444;
+}
+
+.notebook_app #notebook {
+	background: #1a1a1a;
+}
+
+.notebook_app #notebook-container, .edit_app #texteditor-backdrop {
+	background: #272727;
+}
+
+/* Widgets */
+
+.jupyter-widgets, .widget-readout, .widget-label, .widget-label-basic {
+	color: #ccc !important;
+}
+.progress {
+	background-color: #555 !important;
+}
+.progress-bar-success {
+    background-color: #383 !important;
+}
+.jupyter-widgets select, .jupyter-widgets input, .jupyter-widgets textarea, button.jupyter-widgets, .jupyter-button, .jupyter-widgets.widget-tab .p-TabBar-tab {
+	background-color: #333 !important;
+    border-color: #555 !important;
+    color: #ddd !important;
+}
+.p-Collapse-contents, .p-Collapse-header, .jupyter-widgets.widget-tab > .widget-tab-contents {
+	background-color: #2e2e2e !important;
+    border-color: #555 !important;
+    color: #ddd !important;
+}
+.jupyter-button:active, .jupyter-button.mod-active, .jupyter-widgets.widget-tab .p-TabBar-tab.p-mod-current {
+	background-color: #555 !important;
+    border-color: #777 !important;
+    color: #eee !important;
+}
+
+/*
+	notebook editor UI
+*/
+
+.celltoolbar {
+	border-color: #444;
+	background: #444;
+	color: #b7b7b7;
+}
+.ctb_global_show .ctb_show ~ div.text_cell_render {
+	border-color: #444;
+}
+.celltoolbar select {
+    color: #ccc;
+    background: #333;
+}
+
+.modal-dialog .modal-content, .popover, .popover .popover-title {
+	background: rgba(50, 50, 50, 0.95);
+	color: #b7b7b7;
+}
+.modal-header, .popover-title {
+	border-bottom-color: #444;
+}
+.modal-footer {
+	border-top-color: #444;
+}
+.modal-dialog .close {
+	color: #fff;
+	text-shadow: 0 1px 0 #000;
+}
+.modal-dialog .alert-info {
+	background-color: #373E42;
+	color: #d9edf7;
+}
+.popover.bottom > .arrow:after {
+	border-bottom-color: #444;
+}
+
+.btn:focus, .btn:active:focus {
+	outline: 5px auto rgba(102, 175, 233, 0.3);
+	outline-offset: -1px;
+}
+.btn-default {
+	background-color: #222;
+	border-color: #555;
+	color: #aaa;
+}
+.btn-default:focus, .btn-default:hover {
+	background-color: #555;
+	border-color: #222;
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.8);
+	color: #bbb;
+}
+.btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+	background-color: #474747;
+	color: #999;
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+.btn-default.disabled:focus, .btn-default.disabled:hover, 
+.btn-default[disabled]:focus, .btn-default[disabled]:hover {
+	background-color: #555;
+	border-color: #222;
+	box-shadow: 0 0 1px rgba(0, 0, 0, 0.5);
+	color: #aaa;
+}
+.btn-default:active:hover, .btn-default:active:focus, 
+.open > .dropdown-toggle.btn-default:hover, .open > .dropdown-toggle.btn-default:focus {
+	background-color: #474747;
+	color: #999;
+	border-color: #222;
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.btn-primary {
+	color: #eee;
+	background-color: #4481b7;
+	border-color: #222;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+}
+.btn-primary:focus, .btn-primary:hover {
+	background-color: #4481b7;
+	color: #fff;
+}
+.btn-primary:active {
+	background-color: #306ea6;
+	color: #ccc;
+}
+.btn-primary:active:hover, .btn-primary:active:focus {
+	background-color: #306ea6;
+	color: #ccc;
+}
+
+.form-control {
+	background: #222;
+	color: #eee;
+	border-color: #777;
+}
+.form-control:focus {
+	border-color: #458ac1;
+	box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, 0.3);
+}
+.form-control::selection {
+	background: rgba(221, 240, 255, 0.19);
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background-color: #444;
+}
+
+
+#complete {
+	border-color: #444;
+	background: rgba(50, 50, 50, 0.95);
+	color: #b7b7b7;
+	-webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+	box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+.completions select {
+	background: rgba(50, 50, 50, 0.95);
+	color: #b7b7b7;
+}
+
+/*
+	Set styles for outputted content
+*/
+
+div#notebook .text_cell_render {
+	font-size: 16.25px;
+	font-weight: 300;
+	line-height: 1.25;
+}
+
+.rendered_html li p {
+	margin-top: 1em;
+}
+
+/* too explicit
+.rendered_html h1 {
+	color: #CF4A4C;
+}
+*/
+
+/* rendered colored html color acidity removal */
+.rendered_html font[color=blue] {color: #55f;}
+.rendered_html font[color=red] {color: #d33;}
+
+div.output_html { font-family: sans-serif; }
+
+/* Animation may cause heavy cpu loads
+
+.notebook_app div.cell.running .input .input_area { 
+	border-left-color: #82591E;
+	-webkit-animation-name: pulseBorder;
+	-webkit-animation-duration: 1s;
+	-webkit-animation-iteration-count: infinite;
+	-webkit-animation-direction: alternate;
+	-webkit-animation-timing-function: ease-in-out;
+}
+@-webkit-keyframes pulseBorder {
+	from { border-left-color: #82591E; }
+	to { border-left-color: #eea236; }
+}
+*/
+
+.ipython_tooltip, .pretooltiparrow:before, .ipython_tooltip .tooltiptext pre {
+	background-color: #1e1e1e;
+}
+.ipython_tooltip {
+	box-shadow: 0px 6px 10px -1px #000;
+}
+.ui-icon, .ui-widget-content .ui-icon {
+	filter: invert(1);
+}
+
+.notebook_app div.cell.running .input .input_area { 
+	border-left-color: #eea236;
+}
+
+.notebook_app div.input_prompt {color: #9b703f;}
+.notebook_app div.output_prompt {color: #9b859d;}
+.notebook_app div.input_area {
+	border-radius: 0px;
+	border: 1px solid #464b50;
+}
+.notebook_app div.output_subarea { max-width: 100%; }
+.notebook_app div.output_area pre { font-weight: normal; color: #979797; }
+.notebook_app div.output_subarea { font-weight: normal; color: #979797; }
+.notebook_app div.output_stderr {background-color: #A0783C;}
+.notebook_app div.output_stderr pre {color: #eee;}
+
+.notebook_app .rendered_html table, .notebook_app .rendered_html th, .notebook_app .rendered_html tr, .notebook_app .rendered_html td {
+	border: 1px	#979797 solid;
+	color: #aaa;
+}
+.notebook_app div.text_cell_render, .notebook_app div.output_html { color: #aaa; }
+.notebook_app table.dataframe tr { border: 1px #979797; }
+
+.notebook_app .rendered_html pre {
+	background-color: #333;
+	color: #ccc;
+	padding: 0.2em 0.3em;
+	border: #555 0.1em solid;
+}
+.notebook_app .rendered_html code {
+	background-color: #333;
+	color: #ccc;
+	padding: 0.08em 0.2em;
+}
+
+.notebook_app .rendered_html pre > code {
+	padding: 0;
+}
+
+.rendered_html tbody tr:nth-child(odd) {
+	background: #333;
+}
+.rendered_html tbody tr:hover {
+    background: rgba(66, 165, 245, 0.2) !important;
+}
+
+/*
+	Terminal text coloring (errors output)
+*/
+
+span.ansiblack {color: #323537;}
+span.ansiblue {color: #afc4db;}
+span.ansigray {color: #838184;}
+span.ansigreen {color: #8f9d6a;}
+span.ansipurple {color: #9b859d;}
+span.ansired {color: #cf6a4c;}
+span.ansiyellow {color: #f9ee98;}
+
+/*
+	Code editing
+*/
+
+.CodeMirror-line::selection, .CodeMirror-line > span::selection, .CodeMirror-line > span > span::selection {
+    background: #909090;
+}
+
+.CodeMirror {background: #222; color: #eee;}
+div.CodeMirror-selected {background: rgba(221, 240, 255, 0.19) !important;}
+#texteditor-backdrop #texteditor-container .CodeMirror-gutter, .CodeMirror-gutters {background: #444; border-right: 0px; color: #777;}
+.CodeMirror-linenumber {color: #b4b7b4;}
+.CodeMirror-cursor {border-left: 1px solid #A7A7A7 !important; margin-top: -2px; min-height: 18px;} 
+
+.CodeMirror span.cm-comment {color: #888; font-style: italic;}
+.CodeMirror span.cm-atom {color: #CF6A4C;}
+.CodeMirror span.cm-number {color: #CF6A4C;}
+
+.CodeMirror span.cm-property {color: #eee;}
+.CodeMirror span.cm-attribute {color: #D1B851;}
+.CodeMirror span.cm-keyword {color: #CDA869; font-weight: normal;}
+.CodeMirror span.cm-string {color: #8F9D6A;}
+.CodeMirror span.cm-string-2 {color: #E9C062;} /* regexp */
+.CodeMirror span.cm-operator {color: #CDA869;}
+.CodeMirror span.cm-builtin {color: #A36AC7;}
+.CodeMirror span.cm-qualifier {color: #B3BA57;}
+.CodeMirror span.cm-meta {color: #BA62FF;}
+
+.CodeMirror span.cm-variable {color: #eee;}
+.CodeMirror span.cm-variable-2 {color: #7587A6;}
+.CodeMirror span.cm-variable-3 {color: #7587A6;}
+.CodeMirror span.cm-def {color: #9B703F;}
+.CodeMirror span.cm-error {color: #eee; background-color: rgba(86, 45, 86, 0.2);}
+.CodeMirror span.cm-bracket {color: #f80;}
+.CodeMirror span.cm-tag {color: #79e;}
+.CodeMirror span.cm-link {color: #A36AC7;}
+
+.CodeMirror .CodeMirror-matchingbracket { background-color: rgba(255, 255, 85, 0.2); color: #ff5 !important;}
+
+/* rendered code, same as above */
+
+.cm-s-ipython span.cm-comment {color: #888; font-style: italic;}
+.cm-s-ipython span.cm-atom {color: #CF6A4C;}
+.cm-s-ipython span.cm-number {color: #CF6A4C;}
+
+.cm-s-ipython span.cm-property {color: #eee;}
+.cm-s-ipython span.cm-attribute {color: #D1B851;}
+.cm-s-ipython span.cm-keyword {color: #CDA869; font-weight: normal;}
+.cm-s-ipython span.cm-string {color: #8F9D6A;}
+.cm-s-ipython span.cm-string-2 {color: #E9C062;} /* regexp */
+.cm-s-ipython span.cm-operator {color: #CDA869;}
+.cm-s-ipython span.cm-builtin {color: #A36AC7;}
+.cm-s-ipython span.cm-qualifier {color: #B3BA57;}
+.cm-s-ipython span.cm-meta {color: #BA62FF;}
+
+.cm-s-ipython span.cm-variable {color: #eee;}
+.cm-s-ipython span.cm-variable-2 {color: #7587A6;}
+.cm-s-ipython span.cm-variable-3 {color: #7587A6;}
+.cm-s-ipython span.cm-def {color: #9B703F;}
+.cm-s-ipython span.cm-error {color: #eee; background-color: rgba(86, 45, 86, 0.2);}
+.cm-s-ipython span.cm-bracket {color: #f80;}
+.cm-s-ipython span.cm-tag {color: #79e;}
+.cm-s-ipython span.cm-link {color: #A36AC7;}
+
+/*
+	Markdown editing
+*/
+
+.cm-s-default span.cm-header {color: #CF4A4C;}
+.cm-s-default span.cm-variable-2 {color: #7587A6;}
+.cm-s-default span.cm-comment {color: #7F7A80;}
+
+/* copypaste end */
+
+/*
+	Misc
+*/
+
+.output_png > img, .rendered_html img, .rendered_html svg {
+	filter: invert(1) hue-rotate(180deg);
+}
+
+.out_prompt_overlay:hover {
+	background: rgba(240, 240, 240, 0.08) !important;
+}
+
+div.cell.selected:before {
+	background: #37ca !important;
+}
+div.cell.selected {
+	border-color: #37ca;
+}
+.edit_mode div.cell.selected:before {
+	background: #3a4a !important;
+}
+.edit_mode div.cell.selected {
+	border-color: #3a4a !important;
+}
+div.cell.jupyter-soft-selected {
+	background: #335;
+	border-left-color: #557;
+	border-right-color: #557;
+}
+div.cell.selected, div.cell.selected.jupyter-soft-selected {
+	border-color: #57c;
+}
+div.cell.selected.jupyter-soft-selected {
+	background: #458;
+	border-left-width: 1px;
+	padding-left: 5px;
+}
+
+/* scrollbars */
+
+::-webkit-scrollbar {
+	width: 1em;
+}
+::-webkit-scrollbar-thumb {
+	background: #555;
+	background: linear-gradient(90deg, #555 0%, #888 80%, #555 100%);
+	border-radius: 1em;
+}
+::-webkit-scrollbar-corner {
+	background:transparent;
+}
+
+.notification_widget, #logout {
+	color: #ccc;
+	background: #555;
+	border-color: #777;
+}
+
+body > #header {
+	background: #333;
+}
+
+.jupyter-keybindings input, .well {
+	background: #444;
+	border: #777 1px solid;
+	color: #ccc;
+}
+
+.well code {
+	background-color: #303030;
+	border-color: #555;
+	color: #eee;
+}
+
+#texteditor-container .CodeMirror-gutters {
+	background-color: #444;
+}
+
+/* MathJax message */
+#MathJax_Message {
+	background: #555 !important;
+	color: #ccc !important;
+}
+
+/* Keyboard popup */
+
+.typeahead-field input:last-child, .typeahead-hint, .typeahead-container button, .typeahead-container.result .typeahead-list {
+	background: #444;
+	border-color: #777;
+	color: #ccc;
+}
+
+.typeahead-dropdown>li>a, .typeahead-list>li>a {
+	background: #444;
+	color: #ccc;
+}
+.typeahead-dropdown>li.active>a, .typeahead-list>li.active>a {
+	background: #555;
+	color: #ccc;
+}
+.typeahead-dropdown>li.typeahead-group>a, .typeahead-list>li.typeahead-group>a {
+	background: #333;
+	color: #aaa;
+}
+.typeahead-dropdown>li.typeahead-group>a:hover, .typeahead-list>li.typeahead-group>a:hover {
+	background: #555;
+	color: #aaa;
+}
+
+
+/* close media */
+}
