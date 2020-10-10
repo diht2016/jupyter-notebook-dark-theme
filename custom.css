@@ -408,8 +408,7 @@ div.output_html { font-family: sans-serif; }
 }
 
 div.input_area {
-    border-color: rgba(0, 0, 0, 0.10);
-    background: rbga(0, 0, 0, 0.5);
+    background: none;
 }
 
 .notebook_app div.cell.running .input .input_area { 
