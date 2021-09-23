@@ -11,7 +11,8 @@
     (`~` = User home folder, replace it with `%userprofile%` on Windows)
     
     Done! Now Notebook GUI is dark!
-    Then just reload pages in browser if Jupyter is running.
+    Then just reload pages in browser if Jupyter Notebook is running.
+    However, on some systems, it will require a restart of Jupyter Notebook.
     Reset to light theme = just replace the custom.css with empty file.
 */
 
@@ -581,6 +582,18 @@ div.cell.selected.jupyter-soft-selected {
     padding-left: 5px;
 }
 
+/* kernel name */
+
+.kernel_indicator_name {
+    color: #8ad;
+}
+
+/* menu buttons */
+
+.navbar-default .navbar-nav > li > a {
+    color: #aaa;
+}
+
 /* scrollbars */
 
 ::-webkit-scrollbar {
@@ -595,7 +608,7 @@ div.cell.selected.jupyter-soft-selected {
     background:transparent;
 }
 
-.notification_widget, #logout {
+.notification_widget, .button, #logout, #shutdown {
     color: #ccc;
     background: #555;
     border-color: #777;
